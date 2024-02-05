@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Plantilla para crear grupo de seguridad'
+Parameters:
+  # Parámetro del tipo de instancia - en este caso t2.micro
+  EC2InstanceType:
+    Type: String 
+    Default: t2.micro
+  # Parámetro del sistema operativo - en este caso ubuntu
+  EC2OS:
+    Type: String
+    Default: ami-06aa3f7caf3a30282
+    
+Resources:
+  ApplicationServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Grupo de Seguridad para el puerto 8080
+      GroupName: AppServerSecurityGroup
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+  MyInstanceEc2Tomcat:
+    Type: AWS::EC2::Instance
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyInstanceEc2Tomcat
+      ImageId: ami-06aa3f7caf3a30282
+      InstanceType: Ref InstanceType
+      KeyName: vockey
+      SecurityGroupIds:
+        - Ref: ApplicationServerSecurityGroup
+
