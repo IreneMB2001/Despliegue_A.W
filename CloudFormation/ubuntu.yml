@@ -295,7 +295,7 @@ Resources:
         - Key: Name
           Value: !Ref AWS::StackName
 Outputs:
-  DNSPublicaInstancia:
+  InstanceEndpoint:
     Description: "DNS pública de la instancia recién creada"
     Value: !Sub "http://${EC2Instance.PublicDnsName}:8080"
     
