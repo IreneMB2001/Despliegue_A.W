@@ -17,7 +17,7 @@ aws cloudformation deploy \
 	--template-file ubuntu.yml \
 	--no-fail-on-empty-changeset \
 	--capabilities CAPABILITY_NAMED_IAM \
-	--parameter-override EC2InstanceType=$EC2_INSTANCE_TYPE
+	--parameter-overrides InstanceType=$InstanceType
 
 # Verificar el resultado y devolver exports si el despliegue fue exitoso
 if [ $? -eq 0 ]; then
